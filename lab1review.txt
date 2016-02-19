@@ -1,0 +1,26 @@
+7 pts
+
+Summary:
+
+- The summary has poor quality.
+ 
+- You did not submit a .pdf file on iLear, so I could not check the originality
+  of your work. -2pts
+
+
+\LaTeX:
+
+- Good usage of equations.
+
+- When writing \LaTeX, try to keep every line of text within 80 characters or
+  100 at the most, then continue in a new line, \LaTeX will continue if you
+  break lines.
+
+- The usage of figures is incomplete. Usually figures have a caption that
+  describes the content of the figure. What you are doing is simply add a
+  picture with \includegraphics, but you needed to add a figure.
+
+
+- Dr. Rivas
+
+
