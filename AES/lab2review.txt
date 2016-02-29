@@ -1,0 +1,56 @@
+8 pts
+
+Correctness:
+
+- The program produces correct output.
+
+- The program produces output in the incorrect format. The program produces
+  'Enter the key:' before givin the keys. Also the heys are in lowercase.
+  Example:
+$ java Driver < testcase.txt
+Enter the key:
+5468617473206D79204B756E67204675
+e232fcf191129188b159e4e6d679a293
+56082007c71ab18f76435569a03af7fa
+...
+
+
+
+Style:
+
+- Correct indentation
+
+- Good block comments
+
+- Both methods, aesRoundKeys and aesRcon, have no method header. Each function
+  must have a comment block before it, which gives the function name, describes
+  each parameter and the return value (if any), and explains the purpose of the
+  function. Refer to the parameters by name, not by type. Here is an example,
+  but feel free to adapt it for javadoc (using @s):
+/**
+ * factorial
+ *
+ * This function computes the factorial of the given input. The factorial is
+ * defined as factorial(n) = n! = n * (n-1) * (n-2) * ... * 3 * 2 * 1.
+ * 
+ * Parameters:
+ *   n: the number on which to compute the factorial
+ * 
+ * Return value: the factorial of n, or 1 if n <= 0.
+ */
+public static int factorial(int n) {
+    if (n <= 0) {
+        return 1;
+    }
+    return n * factorial(n - 1);
+}
+
+
+Efficiency and Other Comments:
+
+- When searching the Sbox or Rcon you are constantly parsing integers. Perhaps
+  it would be more efficient to have them as integers already and save
+  constantly parsing.
+
+
+- Dr. Rivas
