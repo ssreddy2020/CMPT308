@@ -25,7 +25,7 @@ public class Driver {
 		String key_Hex = sc.nextLine();
 		// condition to check whether the input length is 32 or not
 		if (plainText.length() == 32 && key_Hex.length() == 32) {
-			String[][] result = AEScipher.aes(plainText, key_Hex);
+			AEScipher.aes(plainText, key_Hex);
 			// closes the scanner
 			sc.close();
 		} else {

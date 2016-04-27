@@ -78,8 +78,6 @@ public class AEScipher {
 	public static String[][] aesRoundKeys(String keyHex) {
 		try {
 			// initialize the column length of K matrix and W matrix
-			int K_MATRIX_LENGTH = 4;
-			int W_MATRIX_COL_LENGTH = 44;
 			String[][] wNew = new String[1][4];
 			int count = 0;
 			// 4x4 matrix implementation
@@ -411,41 +409,55 @@ public class AEScipher {
 
 	protected static String[][] aes(String pTextHex, String keyHex) {
 		String[][] pText = new String[4][4];
-		String[][] kText = new String[4][4];
-		aesRoundKeys(keyHex);
-		int count = 0;
-		for (int x = 0; x <= 3; x++) {
-			for (int y = 0; y <= 3; y++) {
-				pText[x][y] = pTextHex.substring(count, count + 2);
-				count = count + 2;
-			}
-		}
-		// split the keyHex
+		int valCount = 0;
 		int cnt = 0;
+		int aesRound = 0;
+		aesRoundKeys(keyHex);
+		// split the plain text
 		for (int x = 0; x <= 3; x++) {
 			for (int y = 0; y <= 3; y++) {
-				kText[y][x] = keyHex.substring(cnt, cnt + 2);
-				cnt = cnt + 2;
+				int beginIndex = valCount;
+				int endIndex = valCount + 2;
+				pText[y][x] = pTextHex.substring(beginIndex, endIndex);
+				valCount = valCount + 2;
 			}
 		}
-		String[][] result = new String[4][4];
-
-		result = aesStateXOR(pText, kText);
-		result = aesNibbleSub(result);
-		result = aesShiftRow(result);
-		result = aesMixColumn(result);
-
-		for (int i = 1; i <= 10; i++) {
-			result = aesNibbleSub(result);
-			result = aesShiftRow(result);
-			result = aesMixColumn(result);
-			result = aesStateXOR(result, kText);
+		for (int matrixWCol = 0; matrixWCol < 44;) {
+			for (int j = 0; j <= 3; j++) {
+				for (int i = 0; i <= 3; i++) {
+					inputKey[i][j] = matrixW[i][matrixWCol];
+				}
+				matrixWCol++;
+			}
+			if (cnt <= 9) {
+				aesRound = cnt++;
+				pText = aesStateXOR(pText, inputKey);
+				pText = aesNibbleSub(pText);
+				pText = aesShiftRow(pText);
+				if (aesRound < 9) {
+					pText = aesMixColumn(pText);
+				}
+			} else if (cnt == 10) {
+				pText = aesStateXOR(pText, inputKey);
+			}
 		}
+		display(pText);
+		return null;
+	}
+
+	/**
+	 * this method is used to display the cipher text of AES ten rounds result
+	 * 
+	 * @param pText
+	 *            : it takes the plain text as input
+	 * @return
+	 */
+	private static String[][] display(String[][] pText) {
 		for (int x = 0; x <= 3; x++) {
 			for (int y = 0; y <= 3; y++) {
-				System.out.print(result[y][x].toUpperCase());
+				System.out.print(pText[y][x].toUpperCase());
 			}
 		}
-		return result;
+		return null;
 	}
 }
