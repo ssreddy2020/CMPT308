@@ -1,7 +1,8 @@
 import java.util.HashMap;
 
 /**
- * file: AESEncrypt.java author: Himaja Kethiri, Sandeep Reddy Salla 
+ * file: AESEncrypt.java 
+ * author: Himaja Kethiri, Sandeep Reddy Salla 
  * course:Security Algorithms and Protocols 
  * Project: AES Encryption and Decryption for 128, 192 and 256 bits 
  * Due date: May 2, 2016 version: 1.0
