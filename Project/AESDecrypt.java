@@ -542,8 +542,8 @@ public class AESDecrypt {
      *            is the key value to be used
      */
     static int rounds = 0;
-
-    public static void aes(String cTextHex, String keyHex) {
+    static StringBuilder cipher = new StringBuilder();
+    public static String aes(String cTextHex, String keyHex) {
         plainMatrix(cTextHex);
         getDetails(keyHex);
         int wcol = 0;
@@ -573,10 +573,11 @@ public class AESDecrypt {
             wcol -= 4;
             if (count == roundCount) {
                 cipherText = aesStateXOR(cipherText, keyMatrix);
-                System.out.print("Plain text is:");
                 for (int i = 0; i < 4; i++) {
                     for (int j = 0; j < 4; j++) {
-                        System.out.print(cipherText[j][i].toUpperCase());
+                        //System.out.print(cipherText[j][i].toUpperCase());
+                        cipher = cipher.append(cipherText[j][i]);
+                        
                     }
                 }
             }
@@ -596,5 +597,6 @@ public class AESDecrypt {
                 rounds = count++;
             }
         }
+        return cipher.toString();
     }
 }
